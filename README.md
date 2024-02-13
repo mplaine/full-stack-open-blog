@@ -40,3 +40,10 @@ Builds the frontend for production using [Vite](https://vitejs.dev/).
 ### `npm run start:production`
 
 Runs the Blog app in production mode using [Node.js](https://nodejs.org/).
+
+
+## Todo
+
+1. Add frontend tests in the [frontend/](./frontend/) directory using Jest.
+2. Add e2e tests in the [root](./) directory using Cypress (for an example, see <https://github.com/wlsf82/frontend-and-backend/>).
+3. Redirect to login page when the token as expired.
