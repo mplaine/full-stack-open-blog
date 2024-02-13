@@ -1,0 +1,26 @@
+name: Periodic health check
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # daily at 12 noon
+
+jobs:
+  health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://blog-5a8n.onrender.com/health
+          follow-redirect: false
+          max-attempts: 3
+          retry-delay: 5s
+          retry-all: false
+      # - name: Notify on failure
+      #   uses: rjstone/discord-webhook-notify@v1
+      #   if: ${{ failure() }}
+      #   with:
+      #     text: Health check failed
+      #     description: The Blog app running online at https://blog-5a8n.onrender.com is down!
+      #     severity: error
+      #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
