@@ -10,6 +10,7 @@
     "lint:backend": "cd backend && npm run lint",
     "test:backend": "cd backend && npm run test",
     "build:frontend": "rm -rf backend/dist && cd frontend && npm run build && cp -r dist ../backend",
+    "build:production": "npm run install:frontend && npm run install:backend && npm run build:frontend",
     "start:production": "cd backend && npm run start"
   },
   "author": "Markku Laine",
