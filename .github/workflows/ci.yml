@@ -47,6 +47,14 @@ jobs:
       - name: Trigger Render deployment
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      # - name: Notify on failure
+      #   uses: rjstone/discord-webhook-notify@v1
+      #   if: ${{ failure() }}
+      #   with:
+      #     text: Build failed
+      #     description: commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build :(
+      #     severity: error
+      #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [render_deployment]
     runs-on: ubuntu-20.04
@@ -60,3 +68,11 @@ jobs:
           DEFAULT_BUMP: patch
           WITH_V: false
           DRY_RUN: false
+      # - name: Notify on success
+      #   uses: rjstone/discord-webhook-notify@v1
+      #   if: ${{ success() }}
+      #   with:
+      #     text: A new version of Blog deployed
+      #     description: to https://blog-5a8n.onrender.com by ${{ github.actor }}
+      #     severity: info
+      #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
