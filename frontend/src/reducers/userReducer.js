@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setNotification } from './notificationReducer'
 import userService from '../services/users'
 
 const initialState = []
@@ -17,8 +18,12 @@ export const { setUsers } = userSlice.actions
 
 export const initializeUsers = () => {
   return async (dispatch) => {
-    const retrievedUsers = await userService.getUsers()
-    dispatch(setUsers(retrievedUsers))
+    try {
+      const retrievedUsers = await userService.getUsers()
+      dispatch(setUsers(retrievedUsers))
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
+    }
   }
 }
 

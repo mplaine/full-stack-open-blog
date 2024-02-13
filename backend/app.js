@@ -43,8 +43,12 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testingRouter)
 }
 
-// Redirect all the remaining requests to dist/index.html due to the use of React Router
-// Note: Render does not support redirects when using a web service
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+// Production: Simulate Nginx routing as Render does not support redirects/rewrites when using a web service
+// Redirect all the remaining requests to dist/index.html due to the use of client-side routing (React Router)
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })

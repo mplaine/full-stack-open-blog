@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setNotification } from './notificationReducer'
 import blogService from '../services/blogs'
 
 const initialState = []
@@ -32,53 +33,73 @@ export const { setBlogs, appendBlog, removeBlog, replaceBlog, addComment } = blo
 
 export const initializeBlogs = () => {
   return async (dispatch) => {
-    const retrievedBlogs = await blogService.getBlogs()
-    dispatch(setBlogs(retrievedBlogs))
+    try {
+      const retrievedBlogs = await blogService.getBlogs()
+      dispatch(setBlogs(retrievedBlogs))
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
+    }
   }
 }
 
 export const createBlog = (blogToBeCreated, user) => {
   return async (dispatch) => {
-    const createdBlog = await blogService.createBlog(blogToBeCreated)
-    if (createdBlog) {
-      const userId = createdBlog.user
-      createdBlog.user = {
-        username: user.username,
-        name: user.name,
-        id: userId
+    try {
+      const createdBlog = await blogService.createBlog(blogToBeCreated)
+      if (createdBlog) {
+        const userId = createdBlog.user
+        createdBlog.user = {
+          username: user.username,
+          name: user.name,
+          id: userId
+        }
+        dispatch(appendBlog(createdBlog))
       }
-      dispatch(appendBlog(createdBlog))
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
     }
   }
 }
 
 export const deleteBlog = (id) => {
   return async (dispatch) => {
-    await blogService.deleteBlog(id)
-    dispatch(removeBlog(id))
+    try {
+      await blogService.deleteBlog(id)
+      dispatch(removeBlog(id))
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
+    }
   }
 }
 
 export const updateBlog = (blogToBeUpdated, user) => {
   return async (dispatch) => {
-    const updatedBlog = await blogService.updateBlog(blogToBeUpdated.id, blogToBeUpdated)
-    if (updatedBlog) {
-      const userId = updatedBlog.user
-      updatedBlog.user = {
-        username: user.username,
-        name: user.name,
-        id: userId
+    try {
+      const updatedBlog = await blogService.updateBlog(blogToBeUpdated.id, blogToBeUpdated)
+      if (updatedBlog) {
+        const userId = updatedBlog.user
+        updatedBlog.user = {
+          username: user.username,
+          name: user.name,
+          id: userId
+        }
+        dispatch(replaceBlog(updatedBlog))
       }
-      dispatch(replaceBlog(updatedBlog))
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
     }
   }
 }
 
 export const addBlogComment = (id, commentToBeAdded) => {
   return async (dispatch) => {
-    const createdBlogComment = await blogService.addBlogComment(id, commentToBeAdded)
-    if (createdBlogComment) {
-      dispatch(addComment({ id, comment: createdBlogComment }))
+    try {
+      const createdBlogComment = await blogService.addBlogComment(id, commentToBeAdded)
+      if (createdBlogComment) {
+        dispatch(addComment({ id, comment: createdBlogComment }))
+      }
+    } catch (exception) {
+      dispatch(setNotification('danger', exception.response.data.error, 5))
     }
   }
 }
