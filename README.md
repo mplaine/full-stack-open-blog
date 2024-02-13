@@ -19,27 +19,31 @@ Installs the frontend dependencies using [npm](https://www.npmjs.com/).
 
 ### `npm run install:backend`
 
-Installs the backend dependencies using [npm](https://www.npmjs.com/).
+Installs the backend dependencies.
 
 ### `npm run lint:frontend`
 
-Lints the frontend code using [ESLint](https://eslint.org/).
+Lints the frontend code.
 
 ### `npm run lint:backend`
 
-Lints the backend code using [ESLint](https://eslint.org/).
+Lints the backend code.
 
 ### `npm run test:backend`
 
-Tests the backend code using [Jest](https://jestjs.io/).
+Tests the backend code.
 
 ### `npm run build:frontend`
 
-Builds the frontend for production using [Vite](https://vitejs.dev/).
+Builds the frontend for production.
+
+### `npm run build:production`
+
+Builds the Blog app for production.
 
 ### `npm run start:production`
 
-Runs the Blog app in production mode using [Node.js](https://nodejs.org/).
+Runs the Blog app in production mode.
 
 
 ## Todo
