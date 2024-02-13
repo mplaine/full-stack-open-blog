@@ -1,4 +1,5 @@
 const config = require('./utils/config')
+const path = require('path')
 const express = require('express')
 require('express-async-errors')
 const app = express()
@@ -17,11 +18,11 @@ const loginRouter = require('./controllers/login')
 const usersRouter = require('./controllers/users')
 const blogsRouter = require('./controllers/blogs')
 
-
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI)
-  .then(_result => {
+mongoose
+  .connect(config.MONGODB_URI)
+  .then((_result) => {
     logger.info('connected to MongoDB')
   })
   .catch((error) => {
@@ -41,6 +42,12 @@ if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
   app.use('/api/testing', testingRouter)
 }
+
+// Redirect all the remaining requests to dist/index.html due to the use of React Router
+// Note: Render does not support redirects when using a web service
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

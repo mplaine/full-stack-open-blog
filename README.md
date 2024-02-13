@@ -2,6 +2,8 @@
 
 This repository contains the Blog app that is created for the exercise 11.20 in the CI/CD module (Part 11) of the [Full Stack Open](https://fullstackopen.com/en/) course.
 
+The Blog app is running online at <https://blog-5a8n.onrender.com>.
+
 
 ## Scripts
 
