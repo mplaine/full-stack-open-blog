@@ -1,0 +1,15 @@
+{
+  "name": "blog",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
+    "test:backend": "cd backend && npm run test"
+  },
+  "author": "Markku Laine",
+  "license": "MIT"
+}
