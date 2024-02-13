@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  frontend_pipeline:
+  frontend_testing:
     runs-on: ubuntu-20.04
     environment: test
     steps:
@@ -21,7 +21,7 @@ jobs:
         run: npm run install:frontend
       - name: Lint frontend code
         run: npm run lint:frontend
-  backend_pipeline:
+  backend_testing:
     runs-on: ubuntu-20.04
     environment: test
     env:
@@ -39,3 +39,11 @@ jobs:
         run: npm run lint:backend
       - name: Test backend code
         run: npm run test:backend
+  render_deployment:
+    needs: [frontend_testing, backend_testing]
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - name: Trigger Render deployment
+        if: ${{ github.event_name == 'push' }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
