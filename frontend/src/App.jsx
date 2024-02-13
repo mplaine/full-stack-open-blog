@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import Blog from './components/Blog'
@@ -17,14 +17,16 @@ import Container from 'react-bootstrap/Container'
 const App = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     dispatch(initializeBlogs())
     dispatch(initializeUser())
     dispatch(initializeUsers())
+    setInitialized(true)
   }, [dispatch])
 
-  if (user === null) {
+  if (initialized && user === null) {
     return <Login />
   }
 
