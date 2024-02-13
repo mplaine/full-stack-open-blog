@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.send('excellent')
 })
 
 // Production: Simulate Nginx routing as Render does not support redirects/rewrites when using a web service
