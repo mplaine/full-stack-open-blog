@@ -18,7 +18,9 @@ const loginRouter = require('./controllers/login')
 const usersRouter = require('./controllers/users')
 const blogsRouter = require('./controllers/blogs')
 
-logger.info('connecting to', config.MONGODB_URI)
+if (process.env.NODE_ENV !== 'production') {
+  logger.info('connecting to', config.MONGODB_URI)
+}
 
 mongoose
   .connect(config.MONGODB_URI)
