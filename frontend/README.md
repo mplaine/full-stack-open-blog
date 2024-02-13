@@ -13,12 +13,12 @@ Installs the frontend dependencies using [npm](https://www.npmjs.com/).
 
 ### `npm run dev`
 
-Runs the frontend app in development mode using [Vite](https://vitejs.dev/).<br>
+Runs the frontend in development mode using [Vite](https://vitejs.dev/).<br>
 Open <http://localhost:5173> to view it in the browser.
 
 ### `npm run build`
 
-Builds the frontend app for production using [Vite](https://vitejs.dev/).
+Builds the frontend for production using [Vite](https://vitejs.dev/).
 
 ### `npm run lint`
 
