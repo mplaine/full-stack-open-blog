@@ -11,6 +11,7 @@ on:
 jobs:
   frontend_pipeline:
     runs-on: ubuntu-20.04
+    environment: test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,6 +23,11 @@ jobs:
         run: npm run lint:frontend
   backend_pipeline:
     runs-on: ubuntu-20.04
+    environment: test
+    env:
+      PORT: ${{ vars.PORT }}
+      SECRET: ${{ secrets.SECRET }}
+      TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
