@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRldmVydHMiLCJpZCI6IjY1ODcyNzZjYzljMDQyNDcxNWQ1NjY2OCIsImlhdCI6MTcwMzUwMTM5MywiZXhwIjoxNzAzNTA0OTkzfQ.NGzJDFG-sot4tdxPb4UeXg1hT79_YcqwBg9chUxZvR0
+
+{
+    "title": "Performance audit: Lego.com",
+    "author": "Tammy Everts",
+    "url": "https://www.speedcurve.com/blog/web-performance-audit-lego/"
+}
